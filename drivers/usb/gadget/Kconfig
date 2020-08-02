@@ -98,6 +98,14 @@ config USB_GADGET_DWC2_OTG_PHY_BUS_WIDTH_8
 
 endif # USB_GADGET_DWC2_OTG
 
+config USB_GADGET_S3C2440
+	bool "Samsung USB2.0 HS OTG controller (gadget mode)"
+	select USB_GADGET_DUALSPEED
+	help
+	  The Samsung USB2.0 high-speed gadget controller support.
+	  Select this option if you want the driver to operate 
+	  in Peripheral mode. This option requires USB_GADGET to be enabled.
+
 config CI_UDC
 	bool "ChipIdea device controller"
 	select USB_GADGET_DUALSPEED

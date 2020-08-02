@@ -213,4 +213,11 @@ config MTK_TIMER
 	  Select this to enable support for the timer found on
 	  MediaTek devices.
 
+config S3C2440_TIMER
+	bool "Samsung s3c2440 timer support"
+	depends on TIMER
+	help
+	  Select this to enable support for the timer found on
+	  Samsung s3c2440 devices.
+
 endmenu

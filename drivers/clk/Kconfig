@@ -152,6 +152,13 @@ config CLK_CDCE9XX
 	   Enable the clock synthesizer driver for CDCE913/925/937/949
 	   series of chips.
 
+config CLK_S3C2440
+	bool "Enable clock driver support for Samsung s3c2440 Soc"
+	depends on CLK && TARGET_JZ2440
+	help
+	  This clock driver adds support for clock realted settings for
+	  Samsung s3c2440 Soc.
+
 source "drivers/clk/analogbits/Kconfig"
 source "drivers/clk/at91/Kconfig"
 source "drivers/clk/exynos/Kconfig"

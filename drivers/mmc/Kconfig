@@ -719,6 +719,13 @@ config MMC_MTK
 	  This is needed if support for any SD/SDIO/MMC devices is required.
 	  If unsure, say N.
 
+config MMC_S3C2440
+	bool "Samsung s3c2440 SD/MMC Host Controller support"
+	depends on TARGET_JZ2440
+	help
+	  This selects support for the SD/MMC Host Controller on
+	  Samsung s3c2440 SoCs.
+
 endif
 
 config FSL_ESDHC

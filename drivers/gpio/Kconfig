@@ -438,4 +438,10 @@ config MT7621_GPIO
 	help
 	  Say yes here to support MediaTek MT7621 compatible GPIOs.
 
+config S3C2440_GPIO
+	bool "Samsung s3c2440 GPIO driver"
+	depends on DM_GPIO
+	help
+	  Supports GPIO access on Samsung s3c2440 SoC.
+
 endmenu

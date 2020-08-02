@@ -1,0 +1,199 @@
+// SPDX-License-Identifier: GPL-2.0+
+/*
+ * Samsung's S3c2440-based JZ2440 board device tree source
+ *
+ * Copyright (c) 2020 Asymptote
+ */
+
+/dts-v1/;
+
+#include "skeleton.dtsi"
+#include <dt-bindings/clock/s3c2440-clock.h>
+#include <dt-bindings/pinctrl/s3c2440.h>
+#include <dt-bindings/gpio/gpio.h>
+
+/ {
+	model = "JZ2440";
+	compatible = "samsung,s3c2440";
+
+	aliases {
+		console = &serial0;
+	};
+
+	pinctrl: pinctrl {
+		compatible = "samsung,s3c2440-pinctrl";
+		// #address-cells = <0x2>;
+		// #size-cells = <0x2>;
+		// ranges;
+
+		led {
+			led0_pin: led0-pin {
+				s3c2440,pins = <S3C2440_GPIOF 4 S3C2440_MUX_GPIO S3C2440_PINCTRL_NONE>;
+			};
+			led1_pin: led1-pin {
+				s3c2440,pins = <S3C2440_GPIOF 5 S3C2440_MUX_GPIO S3C2440_PINCTRL_NONE>;
+			};
+			led2_pin: led2-pin {
+				s3c2440,pins = <S3C2440_GPIOF 6 S3C2440_MUX_GPIO S3C2440_PINCTRL_NONE>;
+			};
+		};
+
+		serial0 {
+			serial0_pin: serial0-pin {
+				s3c2440,pins = <S3C2440_GPIOH 2 S3C2440_MUX_PERIPH_A S3C2440_PINCTRL_NONE>,
+						<S3C2440_GPIOH 3 S3C2440_MUX_PERIPH_A S3C2440_PINCTRL_NONE>;
+			};
+		};
+
+		sdmmc {
+			sdmmc_pin: sdmmc-pin {
+				s3c2440,pins = <S3C2440_GPIOE 5 S3C2440_MUX_PERIPH_A S3C2440_PINCTRL_PULL_UP>,
+						<S3C2440_GPIOE 6 S3C2440_MUX_PERIPH_A S3C2440_PINCTRL_PULL_UP>,
+						<S3C2440_GPIOE 7 S3C2440_MUX_PERIPH_A S3C2440_PINCTRL_PULL_UP>,
+						<S3C2440_GPIOE 8 S3C2440_MUX_PERIPH_A S3C2440_PINCTRL_PULL_UP>,
+						<S3C2440_GPIOE 9 S3C2440_MUX_PERIPH_A S3C2440_PINCTRL_PULL_UP>,
+						<S3C2440_GPIOE 10 S3C2440_MUX_PERIPH_A S3C2440_PINCTRL_PULL_UP>;
+			};
+			cd_pin: cd-pin {
+				s3c2440,pins = <S3C2440_GPIOG 8 S3C2440_MUX_GPIO S3C2440_PINCTRL_NONE>;
+			};
+		};
+
+		usb {
+			pullup_pin: pullup-pin {
+				s3c2440,pins = <S3C2440_GPIOC 5 S3C2440_MUX_GPIO S3C2440_PINCTRL_NONE>;
+			};
+		};
+	};
+
+	gpiob: gpiob@56000010 {
+		compatible = "samsung,s3c2440-gpio-bank";
+		reg = <0x56000010 0xc>;
+
+		gpio-controller;
+		#gpio-cells = <0x2>;
+	};
+
+	gpioc: gpioc@56000020 {
+		compatible = "samsung,s3c2440-gpio-bank";
+		reg = <0x56000020 0xc>;
+
+		gpio-controller;
+		#gpio-cells = <0x2>;
+	};
+
+	gpiod: gpiod@56000030 {
+		compatible = "samsung,s3c2440-gpio-bank";
+		reg = <0x56000030 0xc>;
+
+		gpio-controller;
+		#gpio-cells = <0x2>;
+	};
+
+	gpioe: gpioe@56000040 {
+		compatible = "samsung,s3c2440-gpio-bank";
+		reg = <0x56000040 0xc>;
+
+		gpio-controller;
+		#gpio-cells = <0x2>;
+	};
+
+	gpiof: gpiof@56000050 {
+		compatible = "samsung,s3c2440-gpio-bank";
+		reg = <0x56000050 0xc>;
+		// clocks = <&cru PCLK_GPIO0>;
+		// interrupts = <GIC_SPI 0x51 IRQ_TYPE_LEVEL_HIGH>;
+
+		gpio-controller;
+		#gpio-cells = <0x2>;
+	};
+
+	gpiog: gpiog@56000060 {
+		compatible = "samsung,s3c2440-gpio-bank";
+		reg = <0x56000060 0xc>;
+
+		gpio-controller;
+		#gpio-cells = <0x2>;
+	};
+
+	gpioh: gpioh@56000070 {
+		compatible = "samsung,s3c2440-gpio-bank";
+		reg = <0x56000070 0xc>;
+
+		gpio-controller;
+		#gpio-cells = <0x2>;
+	};
+
+	gpioj: gpioj@560000d0 {
+		compatible = "samsung,s3c2440-gpio-bank";
+		reg = <0x560000d0 0xc>;
+
+		gpio-controller;
+		#gpio-cells = <0x2>;
+	};
+
+	clk: clock-controller@4c000000 {
+		compatible = "samsung,s3c2440-clk";
+		reg = <0x4c000000 0x100>;
+		#clock-cells = <1>;
+		xtal-frequency = <12000000>;
+		u-boot,dm-pre-reloc;
+	};
+
+	timer4: timer@51000000 {
+		compatible = "samsung,s3c2440-timer";
+		reg = <0x51000000 0x100>;
+		id = <4>;
+		clock-names = "timer_clk";
+		clocks = <&clk PCLK_PWMTIMER>;
+	};
+
+	serial0: serial@50000000 {
+		compatible = "samsung,s3c2440-uart";
+		reg = <0x50000000 0x100>;
+		
+		clock-names = "uart0_clk";
+		clocks = <&clk PCLK_UART0>;
+
+		pinctrl-names = "default";
+		pinctrl-0 = <&serial0_pin>;
+
+		u-boot,dm-pre-reloc;
+	};
+
+	sdmmc: mmc@5a000000 {
+		compatible = "samsung,s3c2440-mmc";
+		reg = <0x5a000000 0x1000>;
+		// clock-freq-min-max = <400000 150000000>;
+		clock-names = "sdmmc_clk";
+		clocks = <&clk PCLK_SDI>;
+
+		pinctrl-names = "default";
+		pinctrl-0 = <&sdmmc_pin>,<&cd_pin>;
+	
+		cd-gpio = <&gpiog 8 GPIO_ACTIVE_LOW>;
+
+		bus-width = <4>;
+	};
+
+	usb_otg: usb@ff580000 {
+		compatible = "samsung,s3c2410-usbgadget";
+		// reg = <0x0 0xff580000>;
+		// interrupts = <GIC_SPI 23 IRQ_TYPE_LEVEL_HIGH>;
+		// clocks = <&cru HCLK_OTG0>;
+		// clock-names = "otg";
+
+		pinctrl-names = "default";
+		pinctrl-0 = <&pullup_pin>;	
+	
+		pullup-gpio = <&gpioc 5 GPIO_ACTIVE_HIGH>;
+	
+		// dr_mode = "otg";
+		// g-np-tx-fifo-size = <16>;
+		// g-rx-fifo-size = <275>;
+		// g-tx-fifo-size = <256 128 128 64 64 32>;
+		// g-use-dma;
+		// status = "disabled";
+	};
+
+};

@@ -797,6 +797,12 @@ config MTK_SERIAL
 	  The High-speed UART is compatible with the ns16550a UART and have
 	  its own high-speed registers.
 
+config S3C2440_SERIAL
+	bool "Samsung s3c2440 UART support"
+	depends on DM_SERIAL
+	help
+	  This driver supports the Samsung s3c2440 UART. If unsure say N.
+
 config MPC8XX_CONS
 	bool "Console driver for MPC8XX"
 	depends on MPC8xx

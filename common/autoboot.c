@@ -4,6 +4,8 @@
  * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
  */
 
+#define DEBUG
+
 #include <common.h>
 #include <autoboot.h>
 #include <bootretry.h>

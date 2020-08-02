@@ -284,6 +284,16 @@ config ASPEED_AST2500_PINCTRL
 	Generic Pinctrl framework and is compatible with the Linux driver,
 	i.e. it uses the same device tree configuration.
 
+config PINCTRL_S3C2440
+	bool "Samsung s3c2440 pin control driver"
+	depends on DM
+	help
+	  Supports pin multiplexing control on samsung s3c2440 SoCs.
+
+	  The driver is controlled by a device tree node which contains both
+	  the GPIO definitions and pin control functions for each available
+	  multiplex function.
+
 endif
 
 source "drivers/pinctrl/broadcom/Kconfig"
